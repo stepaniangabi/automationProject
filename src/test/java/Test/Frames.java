@@ -3,13 +3,14 @@ package tests;
 import helpMethods.ElementsMethod;
 import helpMethods.FrameMethods;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
+import pages.FramesPage;
+import pages.HomePage;
 
-public class Frames {
+public class FramesTest {
     public WebDriver driver;
     ElementsMethod elementsMethod;
     FrameMethods frameMethods;
@@ -25,10 +26,14 @@ public class Frames {
 
         driver.get("https://demoqa.com/");
         driver.manage().window().maximize();
-        WebElement framesMeniu = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
-        elementsMethod.javaScriptElement(framesMeniu);
+
+        HomePage homePage = new HomePage(driver);
+        homePage.clickAlertFrameWindow();
+
         WebElement tabButton = driver.findElement(By.xpath("//span[text()='Frames']"));
         elementsMethod.javaScriptElement(tabButton);
+        FramesPage frames = new FramesPage(driver);
+        frames.clickFramesButton();
 
         frameMethods.switchToSpecificFrame("frame1");
 
